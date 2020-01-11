@@ -2161,7 +2161,7 @@ void check_for_running_stats(void)
 	}
 }
 
-static inline void add_stat_sample(struct io_stat *is, unsigned long long data)
+static void add_stat_sample(struct io_stat *is, unsigned long long data)
 {
 	double val = data;
 	double delta;
@@ -2178,6 +2178,7 @@ static inline void add_stat_sample(struct io_stat *is, unsigned long long data)
 	}
 
 	is->samples++;
+        printf("sample: %lu", is->samples);
 }
 
 /*

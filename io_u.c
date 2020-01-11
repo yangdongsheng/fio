@@ -1901,6 +1901,7 @@ static void io_completed(struct thread_data *td, struct io_u **io_u_ptr,
 	struct fio_file *f = io_u->file;
 
 	dprint_io_u(io_u, "complete");
+        printf("io_completed");
 
 	assert(io_u->flags & IO_U_F_FLIGHT);
 	io_u_clear(td, io_u, IO_U_F_FLIGHT | IO_U_F_BUSY_OK);
@@ -1949,8 +1950,10 @@ static void io_completed(struct thread_data *td, struct io_u **io_u_ptr,
 		if (ddir == DDIR_WRITE)
 			file_log_write_comp(td, f, io_u->offset, bytes);
 
-		if (should_account(td))
+		if (should_account(td)) {
+			printf("should acount");
 			account_io_completion(td, io_u, icd, ddir, bytes);
+		}
 
 		icd->bytes_done[ddir] += bytes;
 
